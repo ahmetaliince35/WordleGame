@@ -491,25 +491,23 @@ class _WordBuilderScreenState extends State<WordBuilderScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kelime Türetmece'),
+        title: const Text(
+          'Kelime Türetmece',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           // Pes Et Butonu
-          TextButton.icon(
+          IconButton(
+            icon: const Icon(Icons.flag_outlined, color: Colors.redAccent),
+            tooltip: 'Pes Et',
             onPressed: _showGiveUpDialog,
-            icon: const Icon(Icons.flag_outlined, size: 18, color: Colors.redAccent),
-            label: const Text(
-              'Pes Et',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.redAccent),
-            ),
           ),
           // İpucu Butonu
-          TextButton.icon(
+          IconButton(
+            icon: const Icon(Icons.lightbulb_rounded, color: Color(0xFFD4AF37)),
+            tooltip: 'İpucu',
             onPressed: _showWordHint,
-            icon: const Icon(Icons.lightbulb_rounded, size: 18, color: Color(0xFFD4AF37)),
-            label: const Text(
-              'İpucu',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFD4AF37)),
-            ),
           ),
           IconButton(
             icon: Icon(
@@ -662,43 +660,46 @@ class _WordBuilderScreenState extends State<WordBuilderScreen> {
                                       ),
                                     ),
                                   )
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: List.generate(_selectedRackIndices.length, (idx) {
-                                      final rackIdx = _selectedRackIndices[idx];
-                                      final char = _rackLetters[rackIdx];
+                                : FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: List.generate(_selectedRackIndices.length, (idx) {
+                                        final rackIdx = _selectedRackIndices[idx];
+                                        final char = _rackLetters[rackIdx];
 
-                                      return GestureDetector(
-                                        onTap: () => _onSelectedLetterTap(idx),
-                                        child: Container(
-                                          width: 44,
-                                          height: 48,
-                                          margin: const EdgeInsets.symmetric(horizontal: 3),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: isDark
-                                                ? const Color(0xFF538D4E)
-                                                : const Color(0xFF6AAA64),
-                                            borderRadius: BorderRadius.circular(10),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withValues(alpha: 0.2),
-                                                blurRadius: 3,
-                                                offset: const Offset(0, 2),
+                                        return GestureDetector(
+                                          onTap: () => _onSelectedLetterTap(idx),
+                                          child: Container(
+                                            width: 44,
+                                            height: 48,
+                                            margin: const EdgeInsets.symmetric(horizontal: 3),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color: isDark
+                                                  ? const Color(0xFF538D4E)
+                                                  : const Color(0xFF6AAA64),
+                                              borderRadius: BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withValues(alpha: 0.2),
+                                                  blurRadius: 3,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Text(
+                                              char,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w800,
+                                                color: Colors.white,
                                               ),
-                                            ],
-                                          ),
-                                          child: Text(
-                                            char,
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.white,
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }),
+                                        );
+                                      }),
+                                    ),
                                   ),
                           ),
 
@@ -707,41 +708,46 @@ class _WordBuilderScreenState extends State<WordBuilderScreen> {
                           // Control Buttons: Sil & Gönder
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Row(
-                              children: [
-                                OutlinedButton.icon(
-                                  onPressed: _onClearWord,
-                                  icon: const Icon(Icons.clear_rounded, size: 18),
-                                  label: const Text('Temizle'),
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  OutlinedButton.icon(
+                                    onPressed: _onClearWord,
+                                    icon: const Icon(Icons.clear_rounded, size: 18),
+                                    label: const Text('Temizle'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 8),
-                                OutlinedButton.icon(
-                                  onPressed: _onShuffleRack,
-                                  icon: const Icon(Icons.shuffle_rounded, size: 18),
-                                  label: const Text('Karıştır'),
-                                  style: OutlinedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  const SizedBox(width: 8),
+                                  OutlinedButton.icon(
+                                    onPressed: _onShuffleRack,
+                                    icon: const Icon(Icons.shuffle_rounded, size: 18),
+                                    label: const Text('Karıştır'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    ),
                                   ),
-                                ),
-                                const Spacer(),
-                                FilledButton.icon(
-                                  onPressed: _onSubmitWord,
-                                  icon: const Icon(Icons.check_rounded, size: 20),
-                                  label: const Text('Gönder'),
-                                  style: FilledButton.styleFrom(
-                                    backgroundColor: isDark
-                                        ? const Color(0xFF538D4E)
-                                        : const Color(0xFF6AAA64),
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  const SizedBox(width: 12),
+                                  FilledButton.icon(
+                                    onPressed: _onSubmitWord,
+                                    icon: const Icon(Icons.check_rounded, size: 18),
+                                    label: const Text('Gönder'),
+                                    style: FilledButton.styleFrom(
+                                      backgroundColor: isDark
+                                          ? const Color(0xFF538D4E)
+                                          : const Color(0xFF6AAA64),
+                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
 

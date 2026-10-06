@@ -587,13 +587,17 @@ class _CengelBulmacaScreenState extends State<CengelBulmacaScreen>
           children: [
             const Text(
               'Çengel Bulmaca',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
             ),
             if (_puzzle != null)
               Text(
                 '${_puzzle!.title} • $_solvedCluesCount/${_puzzle!.clues.length} Çözüldü',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11.5,
                   fontWeight: FontWeight.w500,
                   color: isDark ? Colors.white60 : Colors.black54,
                 ),
@@ -601,32 +605,11 @@ class _CengelBulmacaScreenState extends State<CengelBulmacaScreen>
           ],
         ),
         actions: [
-          // İpucu Butonu (Harf Aç)
-          Container(
-            margin: const EdgeInsets.only(right: 6, top: 8, bottom: 8),
-            child: ElevatedButton.icon(
-              onPressed: _useHint,
-              icon: const Icon(Icons.lightbulb_rounded, size: 17, color: Color(0xFFD4AF37)),
-              label: const Text(
-                'Harf Aç',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.3,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: isDark ? const Color(0xFF333A42) : const Color(0xFFFFF8E7),
-                foregroundColor: isDark ? const Color(0xFFFFD54F) : const Color(0xFFB78103),
-                elevation: 0,
-                side: BorderSide(
-                  color: isDark ? const Color(0xFF5D5226) : const Color(0xFFFFE082),
-                  width: 1.2,
-                ),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-              ),
-            ),
+          // İpucu Butonu (Harf Aç - Kompakt ve taşmayan)
+          IconButton(
+            icon: const Icon(Icons.lightbulb_rounded, color: Color(0xFFD4AF37)),
+            tooltip: 'Harf Aç',
+            onPressed: _useHint,
           ),
 
           // Yeni Bulmaca Butonu

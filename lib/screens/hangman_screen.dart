@@ -220,7 +220,11 @@ class _HangmanScreenState extends State<HangmanScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adam Asmaca'),
+        title: const Text(
+          'Adam Asmaca',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
           IconButton(
             icon: Icon(
@@ -282,46 +286,49 @@ class _HangmanScreenState extends State<HangmanScreen> {
                       // Lives & Streak Indicators
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            // Hearts
-                            Row(
-                              children: List.generate(maxLives, (index) {
-                                final isAlive = index < remainingLives;
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 3.0),
-                                  child: Icon(
-                                    isAlive ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-                                    size: 22,
-                                    color: isAlive ? const Color(0xFFE56A54) : Colors.grey.withValues(alpha: 0.5),
-                                  ),
-                                );
-                              }),
-                            ),
-                            const Spacer(),
-                            // Streak
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF6AAA64).withValues(alpha: 0.15),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.local_fire_department_rounded, size: 16, color: Color(0xFF6AAA64)),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    'Seri: $_streak',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 13,
-                                      color: Color(0xFF6AAA64),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Row(
+                            children: [
+                              // Hearts
+                              Row(
+                                children: List.generate(maxLives, (index) {
+                                  final isAlive = index < remainingLives;
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 3.0),
+                                    child: Icon(
+                                      isAlive ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                                      size: 22,
+                                      color: isAlive ? const Color(0xFFE56A54) : Colors.grey.withValues(alpha: 0.5),
                                     ),
-                                  ),
-                                ],
+                                  );
+                                }),
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 20),
+                              // Streak
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF6AAA64).withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.local_fire_department_rounded, size: 16, color: Color(0xFF6AAA64)),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      'Seri: $_streak',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 13,
+                                        color: Color(0xFF6AAA64),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 

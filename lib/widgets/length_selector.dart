@@ -25,52 +25,55 @@ class LengthSelector extends StatelessWidget {
         color: isDark ? GameColors.darkSurface : const Color(0xFFEAEFF5),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: lengths.map((length) {
-          final isSelected = length == selectedLength;
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: lengths.map((length) {
+            final isSelected = length == selectedLength;
 
-          return GestureDetector(
-            onTap: () {
-              if (isSelected) return;
-              if (isGameInProgress) {
-                // If game in progress, show prompt or confirm
-                _confirmSwitch(context, length);
-              } else {
-                onLengthChanged(length);
-              }
-            },
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? (isDark ? GameColors.correctDark : GameColors.correctLight)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(9),
-                boxShadow: isSelected
-                    ? [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.08),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ]
-                    : null,
-              ),
-              child: Text(
-                '$length Harf',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+            return GestureDetector(
+              onTap: () {
+                if (isSelected) return;
+                if (isGameInProgress) {
+                  // If game in progress, show prompt or confirm
+                  _confirmSwitch(context, length);
+                } else {
+                  onLengthChanged(length);
+                }
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                decoration: BoxDecoration(
                   color: isSelected
-                      ? Colors.white
-                      : (isDark ? GameColors.darkTextSecondary : GameColors.lightTextSecondary),
+                      ? (isDark ? GameColors.correctDark : GameColors.correctLight)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(9),
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.08),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
+                      : null,
+                ),
+                child: Text(
+                  '$length Harf',
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                    color: isSelected
+                        ? Colors.white
+                        : (isDark ? GameColors.darkTextSecondary : GameColors.lightTextSecondary),
+                  ),
                 ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

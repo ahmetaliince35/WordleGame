@@ -42,6 +42,28 @@ Gözü yormayan yumuşak pastel renk paleti, ergonomik Türkçe Q klavyesi, tam 
 - **Anlam Gösterimi & Kontrollü Geçiş:** Kelime doğru bilindiğinde TDK anlamı ekranda gösterilir ve oyuncu "Devam Et" butonuna basınca sonraki kelimeye geçilir.
 - **Kademeli Seviye İlerlemesi:** 4 harfliden 7 harfe uzanan seviye sistemi.
 
+### 6. 🔢 Bir İşlem (Matematiksel 4 İşlem Modu)
+- **Kural & Mekanik:** Verilen 5-6 sayı (her biri en fazla 50) ile 4 işlem (`+`, `-`, `×`, `÷`) yapılarak hedef sayıya ulaşmaya çalışılır.
+- **Tek Kullanım Kuralı:** Verilen her sayı yalnızca bir kez kullanılabilir; işlem sonucunda elde edilen yeni sayılar sonraki işlemlerde kullanılabilir.
+- **Zorluk Seviyeleri:** Kolay (50-250), Orta (100-500) ve Zor (150-999) modları.
+- **Geri Al & Sıfırla:** Yapılan her işlem adım adım geri alınabilir veya başlangıç sayılarına sıfırlanabilir.
+- **Otomatik Çözücü & Pes Et:** Takıldığınızda rekürsif Countdown çözücü algoritması ile adım adım en kısa çözümü anında inceleyebilirsiniz.
+- **En Yakın Sonuç Puanlaması:** Tam hedefe ulaşılamasa bile en yakın bulunan değere göre adil puanlama yapılır.
+
+### 7. 🧩 Sudoku (9x9 Zeka Oyunu)
+- **4 Kademeli Zorluk:** Kolay, Orta, Zor ve Çok Zor seviyeleri.
+- **Kusursuz Bulmaca Üretimi:** 9x9 matris ve 3x3 blok kurallarına uygun dinamik üretim motoru.
+- **Not (Kalem) Modu:** Hücrelere olası aday sayıları 3x3 minik notlar halinde kaydedebilme.
+- **Akıllı Vurgulama:** Seçili hücrenin satırı, sütunu, 3x3 kutusu ve aynı sayıya sahip tüm tahta hücreleri anında parlaklaşır.
+- **Geri Al, Sil, İpucu & Hata Takibi:** Hamle geçmişi, yanlış hamle uyarısı ve doğrudan doğru sayıyı açan ipucu desteği.
+
+### 8. 🔍 Sözcük Avı (12x12 Matris)
+- **12x12 Harf Izgarası:** 8 farklı yönde (yatay, dikey ve 45° çapraz, ileri/geri) gizlenmiş Türkçe kelimeler.
+- **Akıcı Dokunmatik Seçim:** Parmağı sürükleyerek veya başlangıç-bitiş harflerine dokunarak kelimeyi işaretleme.
+- **Kalıcı Renkli Vurgular:** Bulunan her kelimeye özel renk atanır ve tahta üzerinde silinmeden korunur.
+- **TDK Sözlük Anlamları:** Bulunan veya listedeki kelimelere dokunarak resmi TDK anlamını okuyabilme.
+- **İpucu Sistemi:** Takıldığınızda henüz bulunmamış bir kelimenin ilk harfi tahtada altın sarısı renkle parlar.
+
 ---
 
 ## ✨ Öne Çıkan Özellikler
@@ -77,12 +99,18 @@ lib/
 │   ├── cengel_bulmaca_screen.dart # Çengel Bulmaca ekranı
 │   ├── game_hub_screen.dart   # Ana Menü / Oyun Merkezi
 │   ├── hangman_screen.dart    # Adam Asmaca ekranı
+│   ├── islem_oyunu_screen.dart # Bir İşlem (4 İşlem Matematik) ekranı
+│   ├── sudoku_screen.dart     # Sudoku (Kolay, Orta, Zor, Çok Zor) ekranı
 │   ├── word_builder_screen.dart # Kelime Türetmece ekranı
+│   ├── word_search_screen.dart # Sözcük Avı (12x12 Matris) ekranı
 │   └── wordle_screen.dart     # Türkçe Wordle oyun ekranı
 ├── services/
 │   ├── crossword_service.dart # Dinamik çengel bulmaca üretim motoru
 │   ├── database_service.dart  # SQLite veritabanı sorguları ve önbellek
-│   └── stats_service.dart     # İstatistik ve yerel kayıt servisi
+│   ├── number_puzzle_service.dart # Bir İşlem bulmaca üretimi ve çözücü motoru
+│   ├── stats_service.dart     # İstatistik ve yerel kayıt servisi
+│   ├── sudoku_service.dart    # Sudoku 9x9 tahta üretim ve doğrulama motoru
+│   └── word_search_service.dart # 12x12 Sözcük Avı üretim motoru
 ├── theme/
 │   └── app_theme.dart         # Renk paletleri ve stiller
 ├── utils/

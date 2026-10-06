@@ -300,16 +300,17 @@ class _AnagramScreenState extends State<AnagramScreen> with SingleTickerProvider
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Anagram Çözücü'),
+        title: const Text(
+          'Anagram Çözücü',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         actions: [
-          // Harf Aç Butonu
-          TextButton.icon(
+          // Harf Aç Butonu (Kompakt ve taşmayan)
+          IconButton(
+            icon: const Icon(Icons.lightbulb_rounded, color: Color(0xFFD4AF37)),
+            tooltip: 'Harf Aç (-15 Puan)',
             onPressed: _useLetterHint,
-            icon: const Icon(Icons.lightbulb_rounded, size: 18, color: Color(0xFFD4AF37)),
-            label: const Text(
-              'Harf Aç',
-              style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFD4AF37)),
-            ),
           ),
           // TDK Anlam Göster Butonu
           IconButton(
